@@ -2,14 +2,18 @@ import colors from "../Theme/base_v1/styles/colors";
 import Layout from "../LayoutSingleCol";
 import Typography from "../Typography";
 import ResultsTable from "../ResultsTable";
+
+//this should probably come in as props
+const activeZip = "90019";
+
 const SectionResults = () => (
   <div className="results-section">
     <Layout>
-      <Typography variant="heading1">Results for “90019”</Typography>
+      <Typography variant="heading1">Results for "{activeZip}" </Typography>
       <hr className="spacer" />
     </Layout>
 
-    <ResultsTable />
+    <ResultsTable activeZipCode={activeZip} />
     <style jsx>{`
       .results-section {
         padding: 4rem 0;

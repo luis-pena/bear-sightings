@@ -1,8 +1,35 @@
 import Layout from "../LayoutSingleCol";
 import Typography from "../Typography";
 import colors from "../Theme/base_v1/styles/colors";
+import resultsMock from "../SectionResults/__mocks__/resultsMock";
+import tableStyles from "./table.styles";
 
 class ResultsTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = resultsMock;
+  }
+
+  renderTableRows = zipCode => {
+    const daveRows = resultsMock[zipCode].map((dave, i) => {
+      return (
+        <div key={i} className="table__body__row">
+          <span>
+            <Typography>{dave.count}</Typography>
+          </span>
+          <span>
+            <Typography variant="body2">{dave.type}</Typography>
+          </span>
+          <span>
+            <Typography>“{dave.notes}”</Typography>
+          </span>
+          <style jsx>{tableStyles}</style>
+        </div>
+      );
+    });
+    return daveRows;
+  };
+
   render() {
     return (
       <div className="results-table">
@@ -19,73 +46,18 @@ class ResultsTable extends React.Component {
             </span>
           </div>
           <div className="table__body">
-            <div className="table__body__row">
-              <span>
-                <Typography>21</Typography>
-              </span>
-              <span>
-                <Typography variant="body2">Life Saver Dave</Typography>
-              </span>
-              <span>
-                <Typography>
-                  “Dave is truly a life saver. Reliable and convenient.”
-                </Typography>
-              </span>
-            </div>
+            {this.renderTableRows(this.props.activeZipCode)}
           </div>
         </Layout>
 
-        <style jsx>{`
-          .results-table {
-            width: 100vw;
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: scroll;
-          }
-
-          .table__head > *,
-          .table__body__row > * {
-            flex: 0 0 auto;
-          }
-
-          .table__head,
-          .table__body__row {
-            display: flex;
-          }
-          .table__head > *,
-          .table__body__row > * {
-            min-width: 5rem;
-            max-width: 10rem;
-            width: 100%;
-            margin-right: 3.5rem;
-          }
-          .table__head > *:last-child,
-          .table__body__row > *:last-child {
-            margin-right: 0;
-            max-width: 30rem;
-          }
-          .table__body {
-            padding: 2rem 0;
-          }
-          .table__body__row > * {
-            margin-bottom: 1.25rem;
-          }
-          .table__body__row {
-            position: relative;
-          }
-          .table__body__row:after {
-            position: absolute;
-            bottom: 0;
-            content: "";
-            display: block;
-            height: 1px;
-            background: ${colors.lightGray};
-            width: 100%;
-          }
-        `}</style>
+        <style jsx>{tableStyles}</style>
       </div>
     );
   }
 }
 
 export default ResultsTable;
+
+ResultsTable.defaultProps = {
+  activeZipCode: "90019"
+};
