@@ -1,6 +1,6 @@
 # Bear Sightings – Dave.com
 
-DEMO 👉 https://bear-sightings-kesvezbvdi.now.sh/
+DEMO 👉 https://bear-sightings-hsk835q6x.vercel.app
 
 This is my solution to a coding challenge created by Dave.com as a part of their onboarding process.
 
